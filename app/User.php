@@ -13,7 +13,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 {
     use HasApiTokens, Authenticatable, Authorizable;
 
-    protected $table = 'users';
+    protected $table = 'um_users';
     protected $primaryKey = 'id';
     protected $guarded = array('id');
     public $timestamps = false;
