@@ -22,7 +22,7 @@ class MataPelajaran extends Controller
         return response()->json([
             'status'  => 200,
             'message' => 'Success',
-            'data'    => Md_Mata_Pelajaran::where('id', $id)->first(),
+            'data'    => Md_Mata_Pelajaran::where('id_mata_pelajaran', $id)->first(),
         ], 200);
     }
 
@@ -34,7 +34,7 @@ class MataPelajaran extends Controller
             return response()->json([
                 'status'  => 200,
                 'message' => 'Success',
-                'data'    => Md_Mata_Pelajaran::where('id', $query['id'])->first(),
+                'data'    => Md_Mata_Pelajaran::where('id_mata_pelajaran', $query['id_mata_pelajaran'])->first(),
             ], 200);
         }
         else {
@@ -48,13 +48,13 @@ class MataPelajaran extends Controller
 
     public function update(Request $request, $id)
     {
-        $query = Md_Mata_Pelajaran::where('id', $id)->update($request->all());
+        $query = Md_Mata_Pelajaran::where('id_mata_pelajaran', $id)->update($request->all());
 
         if ($query) {
             return response()->json([
                 'status'  => 200,
                 'message' => 'Success',
-                'data'    => Md_Mata_Pelajaran::where('id', $id)->first(),
+                'data'    => Md_Mata_Pelajaran::where('id_mata_pelajaran', $id)->first(),
             ], 200);
         }
         else {
@@ -68,7 +68,7 @@ class MataPelajaran extends Controller
 
     public function delete($id)
     {
-        $query = Md_Mata_Pelajaran::where('id', $id)->delete();
+        $query = Md_Mata_Pelajaran::where('id_mata_pelajaran', $id)->delete();
         
         if ($query) {
             return response()->json([

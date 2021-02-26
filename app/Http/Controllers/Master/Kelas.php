@@ -22,7 +22,7 @@ class Kelas extends Controller
         return response()->json([
             'status'  => 200,
             'message' => 'Success',
-            'data'    => Md_Kelas::where('id', $id)->first(),
+            'data'    => Md_Kelas::where('id_kelas', $id)->first(),
         ], 200);
     }
 
@@ -34,7 +34,7 @@ class Kelas extends Controller
             return response()->json([
                 'status'  => 200,
                 'message' => 'Success',
-                'data'    => Md_Kelas::where('id', $query['id'])->first(),
+                'data'    => Md_Kelas::where('id_kelas', $query['id_kelas'])->first(),
             ], 200);
         }
         else {
@@ -48,13 +48,13 @@ class Kelas extends Controller
 
     public function update(Request $request, $id)
     {
-        $query = Md_Kelas::where('id', $id)->update($request->all());
+        $query = Md_Kelas::where('id_kelas', $id)->update($request->all());
 
         if ($query) {
             return response()->json([
                 'status'  => 200,
                 'message' => 'Success',
-                'data'    => Md_Kelas::where('id', $id)->first(),
+                'data'    => Md_Kelas::where('id_kelas', $id)->first(),
             ], 200);
         }
         else {
@@ -68,7 +68,7 @@ class Kelas extends Controller
 
     public function delete($id)
     {
-        $query = Md_Kelas::where('id', $id)->delete();
+        $query = Md_Kelas::where('id_kelas', $id)->delete();
         
         if ($query) {
             return response()->json([

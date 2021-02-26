@@ -22,7 +22,7 @@ class Users extends Controller
         return response()->json([
             'status'  => 200,
             'message' => 'Success',
-            'data'    => User::where('id', $id)->first(),
+            'data'    => User::where('id_user', $id)->first(),
         ], 200);
     }
 
@@ -34,7 +34,7 @@ class Users extends Controller
             return response()->json([
                 'status'  => 200,
                 'message' => 'Success',
-                'data'    => User::where('id', $query['id'])->first(),
+                'data'    => User::where('id_user', $query['id_user'])->first(),
             ], 200);
         }
         else {
@@ -48,13 +48,13 @@ class Users extends Controller
 
     public function update(Request $request, $id)
     {
-        $query = User::where('id', $id)->update($request->all());
+        $query = User::where('id_user', $id)->update($request->all());
 
         if ($query) {
             return response()->json([
                 'status'  => 200,
                 'message' => 'Success',
-                'data'    => User::where('id', $id)->first(),
+                'data'    => User::where('id_user', $id)->first(),
             ], 200);
         }
         else {
@@ -68,7 +68,7 @@ class Users extends Controller
 
     public function delete($id)
     {
-        $query = User::where('id', $id)->delete();
+        $query = User::where('id_user', $id)->delete();
         
         if ($query) {
             return response()->json([

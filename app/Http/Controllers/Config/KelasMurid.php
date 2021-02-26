@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\UserManagement;
+namespace App\Http\Controllers\Config;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Um_Roles;
+use App\Cn_Kelas_Murid;
 
-class Roles extends Controller
+class KelasMurid extends Controller
 {
     public function get()
     {
         return response()->json([
             'status'  => 200,
             'message' => 'Success',
-            'data'    => Um_Roles::all(),
+            'data'    => Cn_Kelas_Murid::with('murid')->with('kelas')->get(),
         ], 200);
     }
 
@@ -22,19 +22,19 @@ class Roles extends Controller
         return response()->json([
             'status'  => 200,
             'message' => 'Success',
-            'data'    => Um_Roles::where('id_role', $id)->first(),
+            'data'    => Cn_Kelas_Murid::where('id_conf_kelas_murid', $id)->first(),
         ], 200);
     }
 
     public function create(Request $request)
     {
-        $query = Um_Roles::create($request->all());
+        $query = Cn_Kelas_Murid::create($request->all());
 
         if ($query) {
             return response()->json([
                 'status'  => 200,
                 'message' => 'Success',
-                'data'    => Um_Roles::where('id_role', $query['id_role'])->first(),
+                'data'    => Cn_Kelas_Murid::where('id_conf_kelas_murid', $query['id_conf_kelas_murid'])->first(),
             ], 200);
         }
         else {
@@ -48,13 +48,13 @@ class Roles extends Controller
 
     public function update(Request $request, $id)
     {
-        $query = Um_Roles::where('id_role', $id)->update($request->all());
+        $query = Cn_Kelas_Murid::where('id_conf_kelas_murid', $id)->update($request->all());
 
         if ($query) {
             return response()->json([
                 'status'  => 200,
                 'message' => 'Success',
-                'data'    => Um_Roles::where('id_role', $id)->first(),
+                'data'    => Cn_Kelas_Murid::where('id_conf_kelas_murid', $id)->first(),
             ], 200);
         }
         else {
@@ -68,7 +68,7 @@ class Roles extends Controller
 
     public function delete($id)
     {
-        $query = Um_Roles::where('id_role', $id)->delete();
+        $query = Cn_Kelas_Murid::where('id_conf_kelas_murid', $id)->delete();
         
         if ($query) {
             return response()->json([
@@ -85,4 +85,5 @@ class Roles extends Controller
             ], 500);
         }
     }
+
 }
