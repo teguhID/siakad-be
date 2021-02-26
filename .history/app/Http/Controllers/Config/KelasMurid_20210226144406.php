@@ -28,27 +28,29 @@ class KelasMurid extends Controller
 
     public function create(Request $request)
     {
-        $data = [];
-
         foreach ($request->id_murid as $k => $v) {
             $query = Cn_Kelas_Murid::create([
                 'id_kelas' => $request->id_kelas,
-                'id_murid' => $request->id_murid[$k],
+                'id_murid' => $request->id_murid[0],
             ]);
 
-            if ($query) {
-                $data[] = $query;
-            }
-            else {
-                $data[] = '';
-            }
+            return $query;
         }
 
-        return response()->json([
-            'status'  => 200,
-            'message' => 'Success',
-            'data'    => $data,
-        ], 200);
+        if ($query) {
+            return response()->json([
+                'status'  => 200,
+                'message' => 'Success',
+                'data'    => Cn_Kelas_Murid::where('id_conf_kelas_murid', $query['id_conf_kelas_murid'])->first(),
+            ], 200);
+        }
+        else {
+            return response()->json([
+                'status'  => 500,
+                'message' => 'Internal Server Error',
+                'data'    => '',
+            ], 500);
+        }
     }
 
     public function update(Request $request, $id)

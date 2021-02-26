@@ -52,14 +52,10 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->post('master/guru/update/{id}', 'Master\Guru@update');
     $router->get('master/guru/delete/{id}', 'Master\Guru@delete');
 
-    
-
     // =========================== Penilaian =========================== 
     $router->get('penilaian', 'Penilaian\Penilaian@get');
     $router->get('penilaian/{id}', 'Penilaian\Penilaian@detail');
     $router->post('penilaian/update/{id}', 'Penilaian\Penilaian@update');
-
-
 
     // =========================== Configuration =========================== 
     // kelas & murid
@@ -82,8 +78,6 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->post('config/kelas-guru/create', 'Config\KelasGuru@create');
     $router->post('config/kelas-guru/update/{id}', 'Config\KelasGuru@update');
     $router->get('config/kelas-guru/delete/{id}', 'Config\KelasGuru@delete');
-
-
 
     // =========================== User Management =========================== 
     // user management User

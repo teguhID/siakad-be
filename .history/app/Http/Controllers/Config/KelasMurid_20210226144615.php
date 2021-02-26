@@ -36,19 +36,25 @@ class KelasMurid extends Controller
                 'id_murid' => $request->id_murid[$k],
             ]);
 
-            if ($query) {
-                $data[] = $query;
-            }
-            else {
-                $data[] = '';
-            }
+            $data[] = $query;
         }
 
-        return response()->json([
-            'status'  => 200,
-            'message' => 'Success',
-            'data'    => $data,
-        ], 200);
+        return $data;
+
+        if ($query) {
+            return response()->json([
+                'status'  => 200,
+                'message' => 'Success',
+                'data'    => Cn_Kelas_Murid::where('id_conf_kelas_murid', $query['id_conf_kelas_murid'])->first(),
+            ], 200);
+        }
+        else {
+            return response()->json([
+                'status'  => 500,
+                'message' => 'Internal Server Error',
+                'data'    => '',
+            ], 500);
+        }
     }
 
     public function update(Request $request, $id)

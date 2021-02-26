@@ -40,14 +40,14 @@ class KelasMurid extends Controller
                 $data[] = $query;
             }
             else {
-                $data[] = '';
+                $data[] = 'error';
             }
         }
 
         return response()->json([
             'status'  => 200,
             'message' => 'Success',
-            'data'    => $data,
+            'data'    => Cn_Kelas_Murid::where('id_conf_kelas_murid', $query['id_conf_kelas_murid'])->first(),
         ], 200);
     }
 

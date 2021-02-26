@@ -45,21 +45,9 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->post('master/murid/update/{id}', 'Master\Murid@update');
     $router->get('master/murid/delete/{id}', 'Master\Murid@delete');
 
-    // master guru
-    $router->get('master/guru', 'Master\Guru@get');
-    $router->get('master/guru/{id}', 'Master\Guru@detail');
-    $router->post('master/guru/create', 'Master\Guru@create');
-    $router->post('master/guru/update/{id}', 'Master\Guru@update');
-    $router->get('master/guru/delete/{id}', 'Master\Guru@delete');
-
-    
-
     // =========================== Penilaian =========================== 
     $router->get('penilaian', 'Penilaian\Penilaian@get');
-    $router->get('penilaian/{id}', 'Penilaian\Penilaian@detail');
     $router->post('penilaian/update/{id}', 'Penilaian\Penilaian@update');
-
-
 
     // =========================== Configuration =========================== 
     // kelas & murid
@@ -71,19 +59,17 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
 
     // kelas & mata pelajaran
     $router->get('config/kelas-mata-pelajaran', 'Config\KelasMataPelajaran@get');
-    $router->get('config/kelas-mata-pelajaran/{id}', 'Config\KelasMataPelajaran@detail');
-    $router->post('config/kelas-mata-pelajaran/create', 'Config\KelasMataPelajaran@create');
-    $router->post('config/kelas-mata-pelajaran/update/{id}', 'Config\KelasMataPelajaran@update');
-    $router->get('config/kelas-mata-pelajaran/delete/{id}', 'Config\KelasMataPelajaran@delete');
+    $router->get('config/kelas-mata-pelajaran/{id}', 'Config\KelasMurid@detail');
+    $router->post('config/kelas-mata-pelajaran/create', 'Config\KelasMurid@create');
+    $router->post('config/kelas-mata-pelajaran/update/{id}', 'Config\KelasMurid@update');
+    $router->get('config/kelas-mata-pelajaran/delete/{id}', 'Config\KelasMurid@delete');
 
-    // kelas & guru
-    $router->get('config/kelas-guru', 'Config\KelasGuru@get');
-    $router->get('config/kelas-guru/{id}', 'Config\KelasGuru@detail');
-    $router->post('config/kelas-guru/create', 'Config\KelasGuru@create');
-    $router->post('config/kelas-guru/update/{id}', 'Config\KelasGuru@update');
-    $router->get('config/kelas-guru/delete/{id}', 'Config\KelasGuru@delete');
-
-
+    // guru & kelas
+    $router->get('config/guru-kelas', 'Config\GuruKelas@get');
+    $router->get('config/guru-kelas/{id}', 'Config\GuruKelas@detail');
+    $router->post('config/guru-kelas/create', 'Config\GuruKelas@create');
+    $router->post('config/guru-kelas/update/{id}', 'Config\GuruKelas@update');
+    $router->get('config/guru-kelas/delete/{id}', 'Config\GuruKelas@delete');
 
     // =========================== User Management =========================== 
     // user management User

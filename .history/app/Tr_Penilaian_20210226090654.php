@@ -11,10 +11,6 @@ class Tr_Penilaian extends Model
     protected $primaryKey = 'id_penilaian';
     public $timestamps = true;
     
-    function guru() {
-        return $this->hasOne(Md_Guru::class, 'id_guru', 'id_guru');
-    }
-
     function murid() {
         return $this->hasOne(Md_Murid::class, 'id_murid', 'id_murid');
     }

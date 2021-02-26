@@ -40,7 +40,7 @@ class KelasMurid extends Controller
                 $data[] = $query;
             }
             else {
-                $data[] = '';
+                $data[] = 'error';
             }
         }
 

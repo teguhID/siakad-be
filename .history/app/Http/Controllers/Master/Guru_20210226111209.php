@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Config;
+namespace App\Http\Controllers\Master;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Cn_Kelas_Murid;
+use App\Md_Guru;
 
-class KelasMurid extends Controller
+class Guru extends Controller
 {
     public function get()
     {
         return response()->json([
             'status'  => 200,
             'message' => 'Success',
-            'data'    => Cn_Kelas_Murid::with('murid')->with('kelas')->get(),
+            'data'    => Md_Guru::all(),
         ], 200);
     }
 
@@ -22,44 +22,39 @@ class KelasMurid extends Controller
         return response()->json([
             'status'  => 200,
             'message' => 'Success',
-            'data'    => Cn_Kelas_Murid::where('id_conf_kelas_murid', $id)->with('murid')->with('kelas')->first(),
+            'data'    => Md_Guru::where('id_guru', $id)->first(),
         ], 200);
     }
 
     public function create(Request $request)
     {
-        $data = [];
-
-        foreach ($request->id_murid as $k => $v) {
-            $query = Cn_Kelas_Murid::create([
-                'id_kelas' => $request->id_kelas,
-                'id_murid' => $request->id_murid[$k],
-            ]);
-
-            if ($query) {
-                $data[] = $query;
-            }
-            else {
-                $data[] = '';
-            }
-        }
-
-        return response()->json([
-            'status'  => 200,
-            'message' => 'Success',
-            'data'    => $data,
-        ], 200);
-    }
-
-    public function update(Request $request, $id)
-    {
-        $query = Cn_Kelas_Murid::where('id_conf_kelas_murid', $id)->update($request->all());
+        $query = Md_Guru::create($request->all());
 
         if ($query) {
             return response()->json([
                 'status'  => 200,
                 'message' => 'Success',
-                'data'    => Cn_Kelas_Murid::where('id_conf_kelas_murid', $id)->first(),
+                'data'    => Md_Guru::where('id_guru', $query['id_guru'])->first(),
+            ], 200);
+        }
+        else {
+            return response()->json([
+                'status'  => 500,
+                'message' => 'Internal Server Error',
+                'data'    => '',
+            ], 500);
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        $query = Md_Guru::where('id_guru', $id)->update($request->all());
+
+        if ($query) {
+            return response()->json([
+                'status'  => 200,
+                'message' => 'Success',
+                'data'    => Md_Guru::where('id_guru', $id)->first(),
             ], 200);
         }
         else {
@@ -73,7 +68,7 @@ class KelasMurid extends Controller
 
     public function delete($id)
     {
-        $query = Cn_Kelas_Murid::where('id_conf_kelas_murid', $id)->delete();
+        $query = Md_Guru::where('id_guru', $id)->delete();
         
         if ($query) {
             return response()->json([
@@ -90,5 +85,4 @@ class KelasMurid extends Controller
             ], 500);
         }
     }
-
 }

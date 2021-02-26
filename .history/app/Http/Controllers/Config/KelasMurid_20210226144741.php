@@ -40,10 +40,12 @@ class KelasMurid extends Controller
                 $data[] = $query;
             }
             else {
-                $data[] = '';
+                $data[] = 'error'
             }
         }
 
+        return $data;
+{
         return response()->json([
             'status'  => 200,
             'message' => 'Success',

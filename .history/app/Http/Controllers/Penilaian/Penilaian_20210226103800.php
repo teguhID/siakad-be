@@ -13,16 +13,8 @@ class Penilaian extends Controller
         return response()->json([
             'status'  => 200,
             'message' => 'Success',
-            'data'    => Tr_Penilaian::where('id_kelas', $request->id_kelas)->where('id_mata_pelajaran', $request->id_mata_pelajaran)->with('guru')->with('murid')->with('kelas')->with('mata_pelajaran')->get(),
-        ], 200);
-    }
-
-    public function detail($id)
-    {
-        return response()->json([
-            'status'  => 200,
-            'message' => 'Success',
-            'data'    => Tr_Penilaian::where('id_penilaian', $id)->with('guru')->with('murid')->with('kelas')->with('mata_pelajaran')->get(),
+            // 'data'    => Tr_Penilaian::where('id_penilaian', $request->id_kelas)->where('id_mata_pelajaran', $request->id_mata_pelajaran)->with('murid')->with('kelas')->with('mata_pelajaran')->get(),
+            'data' => Tr_Penilaian::all(),
         ], 200);
     }
 
@@ -34,7 +26,7 @@ class Penilaian extends Controller
             return response()->json([
                 'status'  => 200,
                 'message' => 'Success',
-                'data'    => Tr_Penilaian::where('id_penilaian', $id)->with('guru')->with('murid')->with('kelas')->with('mata_pelajaran')->get(),
+                'data'    => Tr_Penilaian::where('id_penilaian', $id)->first(),
             ], 200);
         }
         else {
